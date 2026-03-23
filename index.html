@@ -4,33 +4,42 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>راهنمای اپلای دانشگاه‌ها</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet">
   <style>
     * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
     body {
       margin: 0;
-      font-family: Arial, sans-serif;
-      background: #f5f7fb;
+      font-family: "Vazirmatn", system-ui, sans-serif;
+      background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
       color: #1f2937;
     }
+    a { text-decoration: none; }
     .container {
       display: flex;
       min-height: 100vh;
     }
     .sidebar {
       width: 320px;
-      background: #0f172a;
+      background: linear-gradient(180deg, #0f172a 0%, #111827 100%);
       color: white;
       padding: 24px 18px;
       overflow-y: auto;
-      border-left: 1px solid #1e293b;
+      border-left: 1px solid rgba(255,255,255,0.08);
+      position: sticky;
+      top: 0;
+      height: 100vh;
     }
     .sidebar h1 {
       font-size: 22px;
       margin: 0 0 10px;
+      font-weight: 800;
     }
     .sidebar p {
       font-size: 14px;
-      line-height: 1.8;
+      line-height: 2;
       color: #cbd5e1;
       margin: 0 0 20px;
     }
@@ -42,23 +51,26 @@
     .menu button {
       width: 100%;
       text-align: right;
-      border: none;
-      border-radius: 14px;
-      padding: 14px 14px;
-      background: #1e293b;
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 16px;
+      padding: 14px;
+      background: rgba(255,255,255,0.05);
       color: #e5e7eb;
       cursor: pointer;
       transition: 0.2s ease;
       font-size: 14px;
-      line-height: 1.7;
+      line-height: 1.9;
+      font-family: inherit;
     }
     .menu button:hover {
-      background: #334155;
+      background: rgba(255,255,255,0.10);
+      transform: translateY(-1px);
     }
     .menu button.active {
-      background: #2563eb;
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
       color: white;
-      font-weight: bold;
+      font-weight: 700;
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.30);
     }
     .content {
       flex: 1;
@@ -66,65 +78,112 @@
     }
     .page {
       display: none;
-      max-width: 1000px;
+      max-width: 1100px;
       margin: 0 auto;
     }
     .page.active {
       display: block;
     }
     .card {
-      background: white;
-      border-radius: 18px;
-      padding: 22px;
-      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(4px);
+      border: 1px solid rgba(99, 102, 241, 0.10);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 12px 35px rgba(15, 23, 42, 0.08);
       margin-bottom: 18px;
     }
     .hero {
-      background: linear-gradient(135deg, #dbeafe, #eff6ff);
-      border: 1px solid #bfdbfe;
+      background: linear-gradient(135deg, #e0e7ff 0%, #eff6ff 55%, #f8fafc 100%);
+      border: 1px solid #c7d2fe;
     }
     h2 {
       margin-top: 0;
-      font-size: 28px;
+      font-size: 30px;
       color: #0f172a;
+      line-height: 1.5;
     }
     h3 {
       margin-top: 0;
-      font-size: 20px;
+      font-size: 21px;
       color: #1d4ed8;
+      line-height: 1.7;
     }
     p {
-      line-height: 1.9;
+      line-height: 2.1;
       margin: 8px 0;
+      font-size: 15px;
     }
     ul {
       margin: 10px 0 0;
-      padding-right: 18px;
-      line-height: 2;
+      padding-right: 20px;
+      line-height: 2.1;
+      font-size: 15px;
     }
     .tag {
       display: inline-block;
-      background: #e0e7ff;
+      background: #eef2ff;
       color: #3730a3;
-      padding: 6px 12px;
+      padding: 7px 13px;
       border-radius: 999px;
       font-size: 13px;
       margin-left: 8px;
       margin-bottom: 8px;
+      border: 1px solid #c7d2fe;
     }
     .two-col {
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 18px;
     }
+    .three-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
     .checklist li::marker {
       content: '☐  ';
     }
     .note {
-      background: #fff7ed;
+      background: linear-gradient(135deg, #fff7ed, #fffaf5);
       border: 1px solid #fdba74;
+    }
+    .good-fit {
+      background: linear-gradient(135deg, #ecfeff, #f0fdf4);
+      border: 1px solid #86efac;
+    }
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .link-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
       border-radius: 14px;
+      background: #0f172a;
+      color: white;
+      font-size: 14px;
+      transition: 0.2s ease;
+      border: 1px solid rgba(15,23,42,0.08);
+    }
+    .link-btn:hover {
+      background: #1d4ed8;
+      transform: translateY(-1px);
+    }
+    .mini-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
       padding: 14px;
+    }
+    .mini-card strong {
+      display: block;
+      color: #0f172a;
+      margin-bottom: 6px;
     }
     .placeholder {
       text-align: center;
@@ -134,11 +193,16 @@
     .placeholder h2 {
       color: #0f172a;
     }
-    @media (max-width: 900px) {
+    @media (max-width: 980px) {
       .container { flex-direction: column; }
-      .sidebar { width: 100%; border-left: none; }
+      .sidebar {
+        width: 100%;
+        border-left: none;
+        position: relative;
+        height: auto;
+      }
       .content { padding: 16px; }
-      .two-col { grid-template-columns: 1fr; }
+      .two-col, .three-col { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -147,7 +211,7 @@
     <aside class="sidebar">
       <h1>منوی دانشگاه‌ها</h1>
       <p>
-        این صفحه برای مدیریت اپلای چند دانشگاه طراحی شده. فعلا دانشگاه اول کامل نوشته شده و بقیه را بعدا می‌توانی یکی‌یکی اضافه کنی.
+        این صفحه برای مدیریت اپلای چند دانشگاه طراحی شده. فعلا دانشگاه اول کامل‌تر و مرتب‌تر نوشته شده و بقیه را بعدا می‌توانی یکی‌یکی اضافه کنی.
       </p>
 
       <div class="menu">
@@ -176,12 +240,44 @@
           <p><strong>Program:</strong> Neurocognitive Psychology (M.Sc.)</p>
           <div>
             <span class="tag">ورودی: Winter Semester</span>
-            <span class="tag">مسیر اصلی: uni-assist برای مدرک خارجی</span>
-            <span class="tag">ددلاین مهم: 30 April / 15 July</span>
+            <span class="tag">مدرک خارجی: uni-assist</span>
+            <span class="tag">برای ایران: non-EU applicant</span>
+            <span class="tag">ددلاین مهم: 30 April</span>
           </div>
           <p>
-            این بخش طوری نوشته شده که مرحله به مرحله بدانی برای این دانشگاه چه کار باید بکنی، چه مدارکی لازم داری و چه چیزهایی شانس تو را بیشتر می‌کند.
+            این بخش طوری چیده شده که سریع ببینی آیا این رشته برای تو مناسب است یا نه، بعد مرحله به مرحله اپلای را انجام بدهی.
           </p>
+          <div class="links">
+            <a class="link-btn" href="https://uol.de/en/course-of-study/neurocognitive-psychology-master-545" target="_blank">صفحه رسمی برنامه</a>
+            <a class="link-btn" href="https://uol.de/en/psychology/master/application-and-admission" target="_blank">صفحه اپلای و پذیرش</a>
+            <a class="link-btn" href="https://uol.de/en/students/application/international-students" target="_blank">اپلای با مدرک خارجی</a>
+            <a class="link-btn" href="https://uol.de/f/6/dept/psycho/download/master/documents/Specific_eligibility_form_NeuroCogPsy_0226.pdf?v=1772609909" target="_blank">فرم eligibility</a>
+          </div>
+        </div>
+
+        <div class="card good-fit">
+          <h3>برای شرایط تو</h3>
+          <p>
+            چون گفتی <strong>لیسانس روانشناسی</strong> داری، از نظر رشته پایه برای این برنامه نقطه شروع خوبی داری. این برنامه روی psychology، cognitive neuroscience و neuropsychology تمرکز دارد. ولی باید هنوز دقیق چک کنی که واحدهای لازم مثل statistics، cognitive/general psychology، biological psychology یا neuroscience، و experimental work را هم در transcript تو بتوانی نشان بدهی.
+          </p>
+          <p>
+            چون از <strong>ایران</strong> اقدام می‌کنی و مدرکت خارج از آلمان گرفته شده، باید مسیرت را بر اساس <strong>international application via uni-assist</strong> ببینی. برای تو مهم‌ترین تاریخی که باید خیلی جدی بگیری معمولا <strong>30 April</strong> است.
+          </p>
+        </div>
+
+        <div class="three-col">
+          <div class="mini-card">
+            <strong>وضعیت رشته</strong>
+            با لیسانس روانشناسی، از نظر زمینه تحصیلی شانس خوبی برای واجد شرایط بودن داری.
+          </div>
+          <div class="mini-card">
+            <strong>مسیر اپلای</strong>
+            چون مدرکت از ایران است، مسیر اصلی تو uni-assist است.
+          </div>
+          <div class="mini-card">
+            <strong>نکته مهم</strong>
+            این برنامه clinical psychology نیست و بیشتر research-oriented است.
+          </div>
         </div>
 
         <div class="card">
@@ -252,13 +348,25 @@
           </ul>
         </div>
 
-        <div class="card">
-          <h3>ددلاین‌ها</h3>
-          <ul>
-            <li>این رشته فقط برای <strong>Winter Semester</strong> ورودی دارد.</li>
-            <li>ددلاین اصلی معمولا <strong>15 July</strong> است.</li>
-            <li>برای بسیاری از متقاضیان با مدرک خارجی، مسیر uni-assist مهم است و ددلاین مهم آن <strong>30 April</strong> است.</li>
-          </ul>
+        <div class="two-col">
+          <div class="card">
+            <h3>ددلاین‌ها</h3>
+            <ul>
+              <li>این رشته فقط برای <strong>Winter Semester</strong> ورودی دارد.</li>
+              <li>برای متقاضی non-EU با مدرک خارج از آلمان، ددلاین مهم معمولا <strong>30 April</strong> است.</li>
+              <li>بهتر است خیلی زودتر از deadline اپلای کنی.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>لینک‌های مهم</h3>
+            <ul>
+              <li><a href="https://uol.de/en/course-of-study/neurocognitive-psychology-master-545" target="_blank">Study information</a></li>
+              <li><a href="https://uol.de/en/psychology/master/application-and-admission" target="_blank">Application and admission</a></li>
+              <li><a href="https://uol.de/en/students/application/international-students" target="_blank">International application / uni-assist</a></li>
+              <li><a href="https://uol.de/f/6/dept/psycho/download/master/documents/Specific_eligibility_form_NeuroCogPsy_0226.pdf?v=1772609909" target="_blank">Specific eligibility form PDF</a></li>
+            </ul>
+          </div>
         </div>
 
         <div class="card note">
