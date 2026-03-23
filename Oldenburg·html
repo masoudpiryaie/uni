@@ -1,0 +1,471 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>University of Oldenburg - Neurocognitive Psychology</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: "Vazirmatn", system-ui, sans-serif;
+      background: linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+      color: #1f2937;
+    }
+    body.menu-open { overflow: hidden; }
+    a { text-decoration: none; color: inherit; }
+
+    .mobile-topbar {
+      display: none;
+    }
+    .menu-toggle {
+      border: none;
+      border-radius: 14px;
+      background: #0f172a;
+      color: white;
+      padding: 10px 14px;
+      font-family: inherit;
+      font-size: 14px;
+      cursor: pointer;
+    }
+    .overlay {
+      display: none;
+    }
+
+    .layout {
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: 320px;
+      background: linear-gradient(180deg, #0f172a 0%, #111827 100%);
+      color: white;
+      padding: 24px 18px;
+      overflow-y: auto;
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      z-index: 1001;
+    }
+    .sidebar-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+    }
+    .sidebar h1 {
+      margin: 0 0 10px;
+      font-size: 22px;
+      font-weight: 800;
+    }
+    .sidebar p {
+      margin: 0 0 20px;
+      color: #cbd5e1;
+      line-height: 2;
+      font-size: 14px;
+    }
+    .menu-close {
+      display: none;
+      width: 40px;
+      height: 40px;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.08);
+      color: white;
+      font-size: 20px;
+      cursor: pointer;
+    }
+    .menu-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .menu-link {
+      display: block;
+      padding: 14px;
+      border-radius: 16px;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.08);
+      color: #e5e7eb;
+      line-height: 1.9;
+      transition: 0.2s ease;
+    }
+    .menu-link:hover {
+      background: rgba(255,255,255,0.10);
+      transform: translateY(-1px);
+    }
+    .menu-link.active {
+      background: linear-gradient(135deg, #2563eb, #3b82f6);
+      color: white;
+      font-weight: 700;
+      box-shadow: 0 10px 24px rgba(37, 99, 235, 0.30);
+    }
+
+    .content {
+      flex: 1;
+      padding: 28px;
+    }
+    .page {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .card {
+      background: rgba(255,255,255,0.92);
+      border: 1px solid rgba(99, 102, 241, 0.10);
+      border-radius: 24px;
+      padding: 24px;
+      box-shadow: 0 12px 35px rgba(15, 23, 42, 0.08);
+      margin-bottom: 18px;
+    }
+    .hero {
+      background: linear-gradient(135deg, #e0e7ff 0%, #eff6ff 55%, #f8fafc 100%);
+      border: 1px solid #c7d2fe;
+    }
+    h2 {
+      margin-top: 0;
+      font-size: 30px;
+      color: #0f172a;
+      line-height: 1.5;
+    }
+    h3 {
+      margin-top: 0;
+      font-size: 21px;
+      color: #1d4ed8;
+      line-height: 1.7;
+    }
+    p {
+      line-height: 2.1;
+      margin: 8px 0;
+      font-size: 15px;
+    }
+    ul {
+      margin: 10px 0 0;
+      padding-right: 20px;
+      line-height: 2.1;
+      font-size: 15px;
+    }
+    .tag {
+      display: inline-block;
+      background: #eef2ff;
+      color: #3730a3;
+      padding: 7px 13px;
+      border-radius: 999px;
+      font-size: 13px;
+      margin-left: 8px;
+      margin-bottom: 8px;
+      border: 1px solid #c7d2fe;
+    }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .three-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 12px;
+    }
+    .checklist li::marker {
+      content: '☐  ';
+    }
+    .good-fit {
+      background: linear-gradient(135deg, #ecfeff, #f0fdf4);
+      border: 1px solid #86efac;
+    }
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 16px;
+    }
+    .link-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 14px;
+      border-radius: 14px;
+      background: #0f172a;
+      color: white;
+      font-size: 14px;
+      transition: 0.2s ease;
+      border: 1px solid rgba(15,23,42,0.08);
+    }
+    .link-btn:hover {
+      background: #1d4ed8;
+      transform: translateY(-1px);
+    }
+    .mini-card {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 18px;
+      padding: 14px;
+    }
+    .mini-card strong {
+      display: block;
+      color: #0f172a;
+      margin-bottom: 6px;
+    }
+
+    @media (max-width: 980px) {
+      .mobile-topbar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 14px 16px;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        background: rgba(248,250,252,0.95);
+        backdrop-filter: blur(8px);
+        border-bottom: 1px solid rgba(148,163,184,0.18);
+      }
+      .overlay {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(15, 23, 42, 0.45);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.25s ease, visibility 0.25s ease;
+        z-index: 999;
+      }
+      .overlay.show {
+        opacity: 1;
+        visibility: visible;
+      }
+      .sidebar {
+        width: min(86vw, 320px);
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        transform: translateX(100%);
+        transition: transform 0.28s ease;
+        box-shadow: -18px 0 35px rgba(15, 23, 42, 0.22);
+      }
+      .sidebar.open {
+        transform: translateX(0);
+      }
+      .menu-close {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .content {
+        padding: 16px;
+      }
+      .two-col, .three-col {
+        grid-template-columns: 1fr;
+      }
+      h2 {
+        font-size: 24px;
+      }
+      h3 {
+        font-size: 18px;
+      }
+      .card {
+        padding: 18px;
+        border-radius: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="mobile-topbar">
+    <button class="menu-toggle" onclick="openSidebar()">☰ منوی دانشگاه‌ها</button>
+    <strong>University of Oldenburg</strong>
+  </div>
+
+  <div class="overlay" id="overlay" onclick="closeSidebar()"></div>
+
+  <div class="layout">
+    <aside class="sidebar" id="sidebar">
+      <div class="sidebar-head">
+        <h1>منوی دانشگاه‌ها</h1>
+        <button class="menu-close" onclick="closeSidebar()">×</button>
+      </div>
+      <p>
+        هر دانشگاه یک فایل HTML جدا دارد. این صفحه مخصوص دانشگاه اول است.
+      </p>
+
+      <nav class="menu-list">
+        <a class="menu-link active" href="oldenburg.html" onclick="closeSidebar()">1) University of Oldenburg<br>Neurocognitive Psychology (M.Sc.)</a>
+        <a class="menu-link" href="university-2.html" onclick="closeSidebar()">2) University 2</a>
+        <a class="menu-link" href="university-3.html" onclick="closeSidebar()">3) University 3</a>
+        <a class="menu-link" href="university-4.html" onclick="closeSidebar()">4) University 4</a>
+        <a class="menu-link" href="university-5.html" onclick="closeSidebar()">5) University 5</a>
+        <a class="menu-link" href="university-6.html" onclick="closeSidebar()">6) University 6</a>
+        <a class="menu-link" href="university-7.html" onclick="closeSidebar()">7) University 7</a>
+        <a class="menu-link" href="university-8.html" onclick="closeSidebar()">8) University 8</a>
+        <a class="menu-link" href="university-9.html" onclick="closeSidebar()">9) University 9</a>
+        <a class="menu-link" href="university-10.html" onclick="closeSidebar()">10) University 10</a>
+        <a class="menu-link" href="index.html" onclick="closeSidebar()">بازگشت به منوی اصلی</a>
+      </nav>
+    </aside>
+
+    <main class="content">
+      <section class="page">
+        <div class="card hero">
+          <h2>University of Oldenburg</h2>
+          <p><strong>Program:</strong> Neurocognitive Psychology (M.Sc.)</p>
+          <div>
+            <span class="tag">ورودی: Winter Semester</span>
+            <span class="tag">مدرک خارجی: uni-assist</span>
+            <span class="tag">برای ایران: non-EU applicant</span>
+            <span class="tag">ددلاین مهم: 30 April</span>
+          </div>
+          <p>
+            این بخش طوری چیده شده که سریع ببینی آیا این رشته برای تو مناسب است یا نه، بعد مرحله به مرحله اپلای را انجام بدهی.
+          </p>
+          <div class="links">
+            <a class="link-btn" href="https://uol.de/en/course-of-study/neurocognitive-psychology-master-545" target="_blank">صفحه رسمی برنامه</a>
+            <a class="link-btn" href="https://uol.de/en/psychology/master/application-and-admission" target="_blank">صفحه اپلای و پذیرش</a>
+            <a class="link-btn" href="https://uol.de/en/students/application/international-students" target="_blank">اپلای با مدرک خارجی</a>
+            <a class="link-btn" href="https://uol.de/f/6/dept/psycho/download/master/documents/Specific_eligibility_form_NeuroCogPsy_0226.pdf?v=1772609909" target="_blank">فرم eligibility</a>
+          </div>
+        </div>
+
+        <div class="card good-fit">
+          <h3>برای شرایط تو</h3>
+          <p>
+            چون لیسانس روانشناسی داری، از نظر رشته پایه برای این برنامه نقطه شروع خوبی داری. ولی هنوز باید دقیق چک کنی که واحدهای لازم مثل statistics، cognitive/general psychology، biological psychology یا neuroscience، و experimental work را هم در transcript خودت بتوانی نشان بدهی.
+          </p>
+          <p>
+            چون از ایران اقدام می‌کنی و مدرکت خارج از آلمان گرفته شده، مسیر اصلی تو international application via uni-assist است. برای تو مهم‌ترین تاریخی که باید خیلی جدی بگیری معمولا 30 April است.
+          </p>
+        </div>
+
+        <div class="three-col">
+          <div class="mini-card">
+            <strong>وضعیت رشته</strong>
+            با لیسانس روانشناسی، از نظر زمینه تحصیلی شانس خوبی برای واجد شرایط بودن داری.
+          </div>
+          <div class="mini-card">
+            <strong>مسیر اپلای</strong>
+            چون مدرکت از ایران است، مسیر اصلی تو uni-assist است.
+          </div>
+          <div class="mini-card">
+            <strong>نکته مهم</strong>
+            این برنامه clinical psychology نیست و بیشتر research-oriented است.
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>خلاصه خیلی کوتاه</h3>
+          <p>
+            برای این رشته باید Bachelor یا مدرک معادل با حداقل 180 ECTS داشته باشی. علاوه بر آن، واحدهای مرتبط در آمار، روان‌شناسی شناختی یا عمومی، نوروساینس یا biological psychology، و کار پژوهشی یا experimental work هم لازم است. مدرک زبان انگلیسی B2 یا بالاتر هم ضروری است.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>قدم به قدم اپلای</h3>
+          <ul>
+            <li>اول چک کن Bachelor تو حداقل 180 ECTS یا معادل آن باشد.</li>
+            <li>چک کن که حداقل 90 ECTS مرتبط داشته باشی.</li>
+            <li>بررسی کن این بخش‌ها را پوشش داده باشی: statistics، cognitive/general psychology، neuroscience/biological psychology، و experimental project work.</li>
+            <li>مدرک زبان انگلیسی B2 یا بالاتر را آماده کن.</li>
+            <li>Transcript و مدرک یا گواهی موقت فارغ‌التحصیلی را آماده کن.</li>
+            <li>Specific eligibility form را کامل و دقیق پر کن.</li>
+            <li>اگر اسم درس‌ها واضح نیست، course description هم آماده کن.</li>
+            <li>اگر مدرکت خارج از آلمان است، از مسیر uni-assist اقدام کن.</li>
+            <li>همه ترجمه‌های رسمی انگلیسی یا آلمانی را آماده کن.</li>
+            <li>قبل از ددلاین، همه فایل‌ها را کامل و مرتب submit کن.</li>
+          </ul>
+        </div>
+
+        <div class="two-col">
+          <div class="card">
+            <h3>چیزهایی که برای اپلای لازم داری</h3>
+            <ul class="checklist">
+              <li>Bachelor degree یا مدرک معادل</li>
+              <li>حداقل 180 ECTS یا معادل آن</li>
+              <li>Transcript رسمی</li>
+              <li>حداقل 90 ECTS مرتبط</li>
+              <li>حداقل 5 ECTS در Statistics / Quantitative Methods</li>
+              <li>حداقل 6 ECTS در General / Cognitive Psychology</li>
+              <li>حداقل 5 ECTS در Biological Psychology / Neuroscience</li>
+              <li>حداقل 5 ECTS در experimental internship / research work / thesis</li>
+              <li>مدرک زبان انگلیسی B2 یا بالاتر</li>
+              <li>Specific eligibility form</li>
+              <li>ترجمه رسمی مدارک به انگلیسی یا آلمانی</li>
+              <li>مدارک اثبات qualificationهای اضافه، اگر داری</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>چیزهایی که شانس تو را بیشتر می‌کند</h3>
+            <ul class="checklist">
+              <li>معدل بهتر</li>
+              <li>مدرک زبان انگلیسی C1 یا بالاتر</li>
+              <li>Programming skills مثل Python, Matlab, R, Java, C++</li>
+              <li>مدرک یا سابقه مرتبط در programming حداقل 2 ECTS یا 60 ساعت</li>
+              <li>Internship یا research activity مرتبط با neuroscience / neuropsychology / cognitive science</li>
+              <li>Bachelor thesis مرتبط</li>
+              <li>Study-related stay abroad حداقل 4 ماه</li>
+              <li>Voluntary social or community work حداقل 6 ماه</li>
+              <li>مدارک اثبات برای همه موارد بالا</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>چک‌لیست زبان</h3>
+          <ul class="checklist">
+            <li>مدرک English B2 یا بالاتر دارم</li>
+            <li>اگر مدرکم دقیقا B2 است، بیشتر از 2 سال از آن نگذشته</li>
+            <li>اگر مدرکم بالاتر از B2 است، بیشتر از 6 سال از آن نگذشته</li>
+            <li>مدرکم از آزمون‌های قابل قبول مثل IELTS / TOEFL / Cambridge / TOEIC / TELC / UNIcert است</li>
+          </ul>
+        </div>
+
+        <div class="two-col">
+          <div class="card">
+            <h3>ددلاین‌ها</h3>
+            <ul>
+              <li>این رشته فقط برای Winter Semester ورودی دارد.</li>
+              <li>برای متقاضی non-EU با مدرک خارج از آلمان، ددلاین مهم معمولا 30 April است.</li>
+              <li>بهتر است خیلی زودتر از deadline اپلای کنی.</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>لینک‌های مهم</h3>
+            <ul>
+              <li><a href="https://uol.de/en/course-of-study/neurocognitive-psychology-master-545" target="_blank">Study information</a></li>
+              <li><a href="https://uol.de/en/psychology/master/application-and-admission" target="_blank">Application and admission</a></li>
+              <li><a href="https://uol.de/en/students/application/international-students" target="_blank">International application / uni-assist</a></li>
+              <li><a href="https://uol.de/f/6/dept/psycho/download/master/documents/Specific_eligibility_form_NeuroCogPsy_0226.pdf?v=1772609909" target="_blank">Specific eligibility form PDF</a></li>
+            </ul>
+          </div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script>
+    const sidebar = document.getElementById('sidebar');
+    const overlay = document.getElementById('overlay');
+
+    function openSidebar() {
+      sidebar.classList.add('open');
+      overlay.classList.add('show');
+      document.body.classList.add('menu-open');
+    }
+
+    function closeSidebar() {
+      sidebar.classList.remove('open');
+      overlay.classList.remove('show');
+      document.body.classList.remove('menu-open');
+    }
+
+    window.addEventListener('resize', () => {
+      if (window.innerWidth > 980) {
+        closeSidebar();
+      }
+    });
+  </script>
+</body>
+</html>
