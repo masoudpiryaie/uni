@@ -1,1 +1,304 @@
-uni
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>راهنمای اپلای دانشگاه‌ها</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background: #f5f7fb;
+      color: #1f2937;
+    }
+    .container {
+      display: flex;
+      min-height: 100vh;
+    }
+    .sidebar {
+      width: 320px;
+      background: #0f172a;
+      color: white;
+      padding: 24px 18px;
+      overflow-y: auto;
+      border-left: 1px solid #1e293b;
+    }
+    .sidebar h1 {
+      font-size: 22px;
+      margin: 0 0 10px;
+    }
+    .sidebar p {
+      font-size: 14px;
+      line-height: 1.8;
+      color: #cbd5e1;
+      margin: 0 0 20px;
+    }
+    .menu {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .menu button {
+      width: 100%;
+      text-align: right;
+      border: none;
+      border-radius: 14px;
+      padding: 14px 14px;
+      background: #1e293b;
+      color: #e5e7eb;
+      cursor: pointer;
+      transition: 0.2s ease;
+      font-size: 14px;
+      line-height: 1.7;
+    }
+    .menu button:hover {
+      background: #334155;
+    }
+    .menu button.active {
+      background: #2563eb;
+      color: white;
+      font-weight: bold;
+    }
+    .content {
+      flex: 1;
+      padding: 28px;
+    }
+    .page {
+      display: none;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .page.active {
+      display: block;
+    }
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 22px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
+      margin-bottom: 18px;
+    }
+    .hero {
+      background: linear-gradient(135deg, #dbeafe, #eff6ff);
+      border: 1px solid #bfdbfe;
+    }
+    h2 {
+      margin-top: 0;
+      font-size: 28px;
+      color: #0f172a;
+    }
+    h3 {
+      margin-top: 0;
+      font-size: 20px;
+      color: #1d4ed8;
+    }
+    p {
+      line-height: 1.9;
+      margin: 8px 0;
+    }
+    ul {
+      margin: 10px 0 0;
+      padding-right: 18px;
+      line-height: 2;
+    }
+    .tag {
+      display: inline-block;
+      background: #e0e7ff;
+      color: #3730a3;
+      padding: 6px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      margin-left: 8px;
+      margin-bottom: 8px;
+    }
+    .two-col {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .checklist li::marker {
+      content: '☐  ';
+    }
+    .note {
+      background: #fff7ed;
+      border: 1px solid #fdba74;
+      border-radius: 14px;
+      padding: 14px;
+    }
+    .placeholder {
+      text-align: center;
+      padding: 60px 20px;
+      color: #475569;
+    }
+    .placeholder h2 {
+      color: #0f172a;
+    }
+    @media (max-width: 900px) {
+      .container { flex-direction: column; }
+      .sidebar { width: 100%; border-left: none; }
+      .content { padding: 16px; }
+      .two-col { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <aside class="sidebar">
+      <h1>منوی دانشگاه‌ها</h1>
+      <p>
+        این صفحه برای مدیریت اپلای چند دانشگاه طراحی شده. فعلا دانشگاه اول کامل نوشته شده و بقیه را بعدا می‌توانی یکی‌یکی اضافه کنی.
+      </p>
+
+      <div class="menu">
+        <button class="active" onclick="showPage('u1', this)">1) University of Oldenburg<br>Neurocognitive Psychology (M.Sc.)</button>
+        <button onclick="showPage('u2', this)">2) University 2</button>
+        <button onclick="showPage('u3', this)">3) University 3</button>
+        <button onclick="showPage('u4', this)">4) University 4</button>
+        <button onclick="showPage('u5', this)">5) University 5</button>
+        <button onclick="showPage('u6', this)">6) University 6</button>
+        <button onclick="showPage('u7', this)">7) University 7</button>
+        <button onclick="showPage('u8', this)">8) University 8</button>
+        <button onclick="showPage('u9', this)">9) University 9</button>
+        <button onclick="showPage('u10', this)">10) University 10</button>
+        <button onclick="showPage('u11', this)">11) University 11</button>
+        <button onclick="showPage('u12', this)">12) University 12</button>
+        <button onclick="showPage('u13', this)">13) University 13</button>
+        <button onclick="showPage('u14', this)">14) University 14</button>
+        <button onclick="showPage('u15', this)">15) University 15</button>
+      </div>
+    </aside>
+
+    <main class="content">
+      <section id="u1" class="page active">
+        <div class="card hero">
+          <h2>University of Oldenburg</h2>
+          <p><strong>Program:</strong> Neurocognitive Psychology (M.Sc.)</p>
+          <div>
+            <span class="tag">ورودی: Winter Semester</span>
+            <span class="tag">مسیر اصلی: uni-assist برای مدرک خارجی</span>
+            <span class="tag">ددلاین مهم: 30 April / 15 July</span>
+          </div>
+          <p>
+            این بخش طوری نوشته شده که مرحله به مرحله بدانی برای این دانشگاه چه کار باید بکنی، چه مدارکی لازم داری و چه چیزهایی شانس تو را بیشتر می‌کند.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>خلاصه خیلی کوتاه</h3>
+          <p>
+            برای این رشته باید Bachelor یا مدرک معادل با حداقل 180 ECTS داشته باشی. علاوه بر آن، واحدهای مرتبط در آمار، روان‌شناسی شناختی یا عمومی، نوروساینس یا biological psychology، و کار پژوهشی یا experimental work هم لازم است. مدرک زبان انگلیسی B2 یا بالاتر هم ضروری است.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>قدم به قدم اپلای</h3>
+          <ul>
+            <li>اول چک کن Bachelor تو حداقل 180 ECTS یا معادل آن باشد.</li>
+            <li>چک کن که حداقل 90 ECTS مرتبط داشته باشی.</li>
+            <li>بررسی کن این بخش‌ها را پوشش داده باشی: statistics، cognitive/general psychology، neuroscience/biological psychology، و experimental project work.</li>
+            <li>مدرک زبان انگلیسی B2 یا بالاتر را آماده کن.</li>
+            <li>Transcript و مدرک یا گواهی موقت فارغ‌التحصیلی را آماده کن.</li>
+            <li>Specific eligibility form را کامل و دقیق پر کن.</li>
+            <li>اگر اسم درس‌ها واضح نیست، course description هم آماده کن.</li>
+            <li>اگر مدرکت خارج از آلمان است، از مسیر uni-assist اقدام کن.</li>
+            <li>همه ترجمه‌های رسمی انگلیسی یا آلمانی را آماده کن.</li>
+            <li>قبل از ددلاین، همه فایل‌ها را کامل و مرتب submit کن.</li>
+          </ul>
+        </div>
+
+        <div class="two-col">
+          <div class="card">
+            <h3>چیزهایی که برای اپلای لازم داری</h3>
+            <ul class="checklist">
+              <li>Bachelor degree یا مدرک معادل</li>
+              <li>حداقل 180 ECTS یا معادل آن</li>
+              <li>Transcript رسمی</li>
+              <li>حداقل 90 ECTS مرتبط</li>
+              <li>حداقل 5 ECTS در Statistics / Quantitative Methods</li>
+              <li>حداقل 6 ECTS در General / Cognitive Psychology</li>
+              <li>حداقل 5 ECTS در Biological Psychology / Neuroscience</li>
+              <li>حداقل 5 ECTS در experimental internship / research work / thesis</li>
+              <li>مدرک زبان انگلیسی B2 یا بالاتر</li>
+              <li>Specific eligibility form</li>
+              <li>ترجمه رسمی مدارک به انگلیسی یا آلمانی</li>
+              <li>مدارک اثبات qualificationهای اضافه، اگر داری</li>
+            </ul>
+          </div>
+
+          <div class="card">
+            <h3>چیزهایی که شانس تو را بیشتر می‌کند</h3>
+            <ul class="checklist">
+              <li>معدل بهتر</li>
+              <li>مدرک زبان انگلیسی C1 یا بالاتر</li>
+              <li>Programming skills مثل Python, Matlab, R, Java, C++</li>
+              <li>مدرک یا سابقه مرتبط در programming حداقل 2 ECTS یا 60 ساعت</li>
+              <li>Internship یا research activity مرتبط با neuroscience / neuropsychology / cognitive science</li>
+              <li>Bachelor thesis مرتبط</li>
+              <li>Study-related stay abroad حداقل 4 ماه</li>
+              <li>Voluntary social or community work حداقل 6 ماه</li>
+              <li>مدارک اثبات برای همه موارد بالا</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="card">
+          <h3>چک‌لیست زبان</h3>
+          <ul class="checklist">
+            <li>مدرک English B2 یا بالاتر دارم</li>
+            <li>اگر مدرکم دقیقا B2 است، بیشتر از 2 سال از آن نگذشته</li>
+            <li>اگر مدرکم بالاتر از B2 است، بیشتر از 6 سال از آن نگذشته</li>
+            <li>مدرکم از آزمون‌های قابل قبول مثل IELTS / TOEFL / Cambridge / TOEIC / TELC / UNIcert است</li>
+          </ul>
+        </div>
+
+        <div class="card">
+          <h3>ددلاین‌ها</h3>
+          <ul>
+            <li>این رشته فقط برای <strong>Winter Semester</strong> ورودی دارد.</li>
+            <li>ددلاین اصلی معمولا <strong>15 July</strong> است.</li>
+            <li>برای بسیاری از متقاضیان با مدرک خارجی، مسیر uni-assist مهم است و ددلاین مهم آن <strong>30 April</strong> است.</li>
+          </ul>
+        </div>
+
+        <div class="card note">
+          <h3>نکته مهم</h3>
+          <p>
+            اگر هنوز Bachelor تو کامل نشده، در بعضی شرایط ممکن است پذیرش مشروط بگیری. همچنین اگر بعضی واحدهایت اسم مشخصی ندارند، حتما course description بگذار تا دانشگاه بتواند آن‌ها را درست ارزیابی کند.
+          </p>
+        </div>
+      </section>
+
+      <section id="u2" class="page">
+        <div class="card placeholder">
+          <h2>University 2</h2>
+          <p>اینجا بعدا اطلاعات کامل دانشگاه دوم را می‌گذاریم.</p>
+        </div>
+      </section>
+
+      <section id="u3" class="page"><div class="card placeholder"><h2>University 3</h2><p>اینجا بعدا اطلاعات کامل دانشگاه سوم را می‌گذاریم.</p></div></section>
+      <section id="u4" class="page"><div class="card placeholder"><h2>University 4</h2><p>اینجا بعدا اطلاعات کامل دانشگاه چهارم را می‌گذاریم.</p></div></section>
+      <section id="u5" class="page"><div class="card placeholder"><h2>University 5</h2><p>اینجا بعدا اطلاعات کامل دانشگاه پنجم را می‌گذاریم.</p></div></section>
+      <section id="u6" class="page"><div class="card placeholder"><h2>University 6</h2><p>اینجا بعدا اطلاعات کامل دانشگاه ششم را می‌گذاریم.</p></div></section>
+      <section id="u7" class="page"><div class="card placeholder"><h2>University 7</h2><p>اینجا بعدا اطلاعات کامل دانشگاه هفتم را می‌گذاریم.</p></div></section>
+      <section id="u8" class="page"><div class="card placeholder"><h2>University 8</h2><p>اینجا بعدا اطلاعات کامل دانشگاه هشتم را می‌گذاریم.</p></div></section>
+      <section id="u9" class="page"><div class="card placeholder"><h2>University 9</h2><p>اینجا بعدا اطلاعات کامل دانشگاه نهم را می‌گذاریم.</p></div></section>
+      <section id="u10" class="page"><div class="card placeholder"><h2>University 10</h2><p>اینجا بعدا اطلاعات کامل دانشگاه دهم را می‌گذاریم.</p></div></section>
+      <section id="u11" class="page"><div class="card placeholder"><h2>University 11</h2><p>اینجا بعدا اطلاعات کامل دانشگاه یازدهم را می‌گذاریم.</p></div></section>
+      <section id="u12" class="page"><div class="card placeholder"><h2>University 12</h2><p>اینجا بعدا اطلاعات کامل دانشگاه دوازدهم را می‌گذاریم.</p></div></section>
+      <section id="u13" class="page"><div class="card placeholder"><h2>University 13</h2><p>اینجا بعدا اطلاعات کامل دانشگاه سیزدهم را می‌گذاریم.</p></div></section>
+      <section id="u14" class="page"><div class="card placeholder"><h2>University 14</h2><p>اینجا بعدا اطلاعات کامل دانشگاه چهاردهم را می‌گذاریم.</p></div></section>
+      <section id="u15" class="page"><div class="card placeholder"><h2>University 15</h2><p>اینجا بعدا اطلاعات کامل دانشگاه پانزدهم را می‌گذاریم.</p></div></section>
+    </main>
+  </div>
+
+  <script>
+    function showPage(id, btn) {
+      document.querySelectorAll('.page').forEach(page => page.classList.remove('active'));
+      document.querySelectorAll('.menu button').forEach(button => button.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+      btn.classList.add('active');
+    }
+  </script>
+</body>
+</html>
